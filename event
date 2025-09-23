@@ -1,0 +1,12 @@
+import subprocess
+
+
+def main():
+    subprocess.call("%SystemRoot%\\system32\\WindowsPowerShell\\v1.0\\powershell.exe "
+                    "Get-WinEvent -LogName Security -FilterHashtable @{Id=4624} |"
+                    "Where-Object { $_.Properties[5].Value -eq $env:USERNAME } |"
+                    "Select-Object -Skip 1 -First 1 -ExpandProperty TimeCreated", shell=True)
+
+
+if __name__ == "__main__":
+    main()
